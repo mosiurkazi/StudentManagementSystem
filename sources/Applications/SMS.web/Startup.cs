@@ -46,6 +46,12 @@ namespace SMS.web
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            //Entity Framework configuration
+            services.AddEntityFrameworkSqlServer();
+            services.AddDbContext<DemoContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            );
+
             var builder = new ContainerBuilder();
             builder.Populate(services);
             var container = builder.Build();
